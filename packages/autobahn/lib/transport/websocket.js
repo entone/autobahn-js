@@ -239,11 +239,6 @@ Factory.prototype.create = function () {
                   clearInterval(auto_ping_interval);
                   return websocket.terminate();
                }
-
-               // Do not send a ping because we received a message a moment ago
-               if (get_time_since_last_read() < self._options.autoping_interval) {
-                  return;
-               }
                websocket.isAlive = false;
                websocket.ping(randomBytes(self._options.autoping_size));
             }, self._options.autoping_interval);
